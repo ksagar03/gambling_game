@@ -4,5 +4,5 @@ export function pad(num){
     return num*DECIMAL_MULTIPLIER
 }
 export function unpad(num){
-    return Math.floor(n/DECIMAL_MULTIPLIER)
+    return Math.floor(num/DECIMAL_MULTIPLIER)
 }
