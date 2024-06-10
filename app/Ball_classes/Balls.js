@@ -2,12 +2,14 @@ import { gravity, horizontal_friction, vertical_friction } from "./constants";
 import { pad, unpad } from "./paddings";
 
 export class Ball {
-  constructor(x, y, radius, color, ctx, onFinish, obstacles, sinks) {
+  constructor(x, y, radius, color, ctx, obstacles, sinks, onFinish) {
     this.x = x;
     this.y = y;
     this.radius = radius;
     this.color = color;
-    this.ctx = CanvasRenderingContext2D;
+    this.vx = 0;
+    this.vy = 0;
+    this.ctx = ctx;
     this.obstacles = obstacles;
     this.sinks = sinks;
     this.onFinish = onFinish;
@@ -28,7 +30,7 @@ export class Ball {
       const dist = Math.hypot(this.x - obstacle.x, this.y - obstacle.y);
       if (dist < pad(this.radius + obstacle.radius)) {
         //  this is to calculate the collision angle
-        const angle = Math.atan(this.y - obstacle.y, this.x - obstacle.x);
+        const angle = Math.atan2(this.y - obstacle.y, this.x - obstacle.x);
 
         // reflect veloctiy - this is to calculate the speed at which it needs to be bounce back
         const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
@@ -41,15 +43,19 @@ export class Ball {
         this.y += pad(Math.sin(angle) + overlap);
       }
     });
-
-    for (let i=0; i<this.sinks.length; i++){
-        const sink = this.sinks[i]
-        if(unpad(this.x) > sink.x - sink.width/2 && unpad(this.x)< sink.x + this.width /2 && (unpad(this.y) + this.radius)> (sink.y - sink.height/2 )){
-            this.vx = 0
-            this.vy = 0
-            this.onFinish(i)
-            break;
-        }
+    // console.log(this.x, this.y);
+    for (let i = 0; i < this.sinks.length; i++) {
+      const sink = this.sinks[i];
+      if (
+        unpad(this.x) > sink.x - sink.width / 2 &&
+        unpad(this.x) < sink.x + this.width / 2 &&
+        unpad(this.y) + this.radius > sink.y - sink.height / 2
+      ) {
+        this.vx = 0;
+        this.vy = 0;
+        this.onFinish(i);
+        break;
+      }
     }
   }
 }

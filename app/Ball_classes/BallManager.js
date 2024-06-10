@@ -90,10 +90,6 @@ export class BallManager {
     this.balls.push(newBall);
   }
   drawObstacles() {
-    if (!this?.ctx) {
-      alert("canvas is not formed");
-    }
-
     this.ctx.fillStyle = "white";
     this.obstacles.forEach((obstacle) => {
       this.ctx.beginPath();
