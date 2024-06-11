@@ -37,7 +37,7 @@ const Simulation = () => {
   useEffect(() => {
     if (canvasRef.current) {
       const ballManager = new BallManager(
-        canvasRef.current,
+        
         (index, startX) => {
           setOutputs((outputs) => {
             return {
@@ -45,7 +45,8 @@ const Simulation = () => {
               [index]: [...BallManager(outputs[index] || []), startX],
             };
           });
-        }
+        },
+        canvasRef.current
       );
       simulate(ballManager);
 
@@ -58,7 +59,7 @@ const Simulation = () => {
    
       <div className="flex flex-col justify-center items-center ">
         {JSON.stringify(outputs, null, 2)}
-        <camvas ref={canvasRef} width="900" height="900"></camvas>
+        <camvas ref={canvasRef} width="800" height="800"></camvas>
       </div>
   );
 };
