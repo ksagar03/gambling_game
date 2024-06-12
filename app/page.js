@@ -30,7 +30,7 @@ export default function Home() {
         class="relative inline-block text-lg group ml-9"
         onClick={async () => {
           const respose = await axios.post(
-            "http://localhost:3000/api/addball",
+            "https://gambling-game.vercel.app/api/addball",
             { data: 1 }
           );
           if (ballManager) {
