@@ -10,7 +10,7 @@ import {
 import { pad, unpad } from "./paddings";
 import { Ball } from "./Balls";
 import { Obstacles } from "./objects";
-import Error from "next/error";
+// import Error from "next/error";
 
 const create_Obstacles = () => {
   let obstacles = [];
@@ -84,7 +84,10 @@ export class BallManager {
       this.sinks,
       (index) => {
         this.balls = this.balls.filter((ball) => ball !== newBall);
-        this.onFinish(index, startX);
+        if ( this.onFinish){
+          this.onFinish(index, startX);
+        }
+        
       }
     );
     this.balls.push(newBall);

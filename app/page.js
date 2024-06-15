@@ -7,6 +7,9 @@ import { POST } from "./api/addball/route";
 import axios from "axios";
 
 export default function Home() {
+  // const api_url = "https://gambling-game.vercel.app"
+  const api_url = "http://localhost:3000";
+
   const [ballManager, setBallManager] = useState();
   const canvasRef = useRef(null);
   useEffect(() => {
@@ -16,10 +19,10 @@ export default function Home() {
     }
   }, [canvasRef]);
   return (
-    <div className=" bg-violet-950 flex flex-col lg:flex-row items-center justify-center">
+    <div className="flex flex-col lg:flex-row items-center justify-center">
       <canvas
         ref={canvasRef}
-        width="800"
+        width={800}
         height={800}
         className="border-2 border-slate-200 rounded-lg m-3 mr-9 "
       ></canvas>
@@ -29,10 +32,9 @@ export default function Home() {
       <button
         class="relative inline-block text-lg group ml-9"
         onClick={async () => {
-          const respose = await axios.post(
-            "https://gambling-game.vercel.app/api/addball",
-            { data: 1 }
-          );
+          const respose = await axios.post(`${api_url}/api/addball`, {
+            data: 1,
+          });
           if (ballManager) {
             console.log(respose);
             ballManager.addBall(respose.data.point);
