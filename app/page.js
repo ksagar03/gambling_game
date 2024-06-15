@@ -7,8 +7,8 @@ import { POST } from "./api/addball/route";
 import axios from "axios";
 
 export default function Home() {
-  // const api_url = "https://gambling-game.vercel.app"
-  const api_url = "http://localhost:3000";
+  const api_url = "https://gambling-game.vercel.app"
+  // const api_url = "http://localhost:3000";
 
   const [ballManager, setBallManager] = useState();
   const canvasRef = useRef(null);
