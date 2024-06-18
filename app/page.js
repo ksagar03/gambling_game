@@ -29,8 +29,9 @@ export default function Home() {
       {/* <button className="border-2 px-5 py-2 rounded-lg hover:bg-amber-950">
           Add ball
         </button> */}
+     <div>
       <button
-        class="relative inline-block text-lg group ml-9"
+        className=" relative inline-block text-lg group" 
         onClick={async () => {
           const respose = await axios.post(`${api_url}/api/addball`, {
             data: 1,
@@ -51,6 +52,10 @@ export default function Home() {
           data-rounded="rounded-lg"
         ></span>
       </button>
+      
+      <p className=" text-white mt-10"><b> Fun fact:</b> Your ball destination is already decided when you click on the add ball</p>
+      </div>
+      
     </div>
   );
 }
